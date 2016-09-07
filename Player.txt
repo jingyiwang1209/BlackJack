@@ -1,0 +1,59 @@
+package blackJack;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class Player
+{
+ private String Name;
+ private List<Card>cardList=new ArrayList<>();
+ private int totalPoint;
+
+ 
+ 
+public Player(String Name)
+{
+	super();
+	this.Name=Name;
+}
+
+public void addCard(Card card)
+{
+	cardList.add(card);
+}
+public String getName()
+{
+	return Name;
+}
+public void setName(String name)
+{
+	Name = name;
+}
+public List<Card> getCardList()
+{
+	return cardList;
+}
+public void setCardList(List<Card> cardList)
+{
+	this.cardList = cardList;
+}
+public int getTotalPoint()
+{
+	return totalPoint;
+}
+public void setTotalPoint(int totalPoint)
+{
+	this.totalPoint = totalPoint;
+}
+
+
+
+
+
+
+
+
+
+ 
+}

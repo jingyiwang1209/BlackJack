@@ -1,0 +1,194 @@
+package blackJack;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
+
+public class GamingSystem
+{
+	 public static String[] Shape_S={"Spade","Club","Diamond","Heart"};
+	 public static String[] Number_S={"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
+	 private List<Player>playerList=new ArrayList<>();
+	 private List<Card>entireCard=new ArrayList<>();
+     private List<Player>winnerC=new ArrayList<>();
+    
+  public void cardShuffling()
+  {
+	  
+	  for(int i=0;i<Shape_S.length;i++)
+	  {
+		  for (int j=0;j<Number_S.length;j++)
+		  {
+			  String s=Shape_S[i];
+			  String n=Number_S[j];
+			  entireCard.add(new Card(s,n));
+		  }		 
+	  }  
+	
+  }	 
+	    
+  public void cardHandling()
+  {
+	      System.out.println("---Welcome to Black Jack Game---");
+		  System.out.println("Please input the number of players: ");
+		  
+		  Scanner input= new Scanner(System.in);
+		  int num=input.nextInt();
+		  System.out.println("Shuffling cards...");
+		  System.out.println("Handling cards...");
+		  
+		 
+		  for(int i=0;i<num;i++)
+		  {
+			  System.out.println("The player's name: ");
+			  String pname=input.next();
+			  playerList.add(new Player(pname));
+		  }  
+		  
+		  for(int i=0;i<playerList.size();i++)
+		  {
+			 
+			 int tcount=0;
+			 Random rd=new Random();
+			 int sn;
+			 int nn;
+		      for(int j=0;j<3;j++)
+			  {         
+		    	  
+		    	  do{
+		    		  sn=rd.nextInt(Shape_S.length);
+		    		  nn=rd.nextInt(Number_S.length);
+		    	  }while(playerList.get(i).getCardList().contains(new Card(Shape_S[sn], Number_S[nn])));
+			       playerList.get(i).addCard(new Card(Shape_S[sn],Number_S[nn]));			       
+			       
+			       String s=playerList.get(i).getCardList().get(j).getNumber();
+			       int count = 0;
+				   if(s.equals("A"))
+			    	   count=1;
+			       if(s.equals("2"))
+			    	   count=2;
+			       if(s.equals("3"))
+			    	   count=3;
+			       if(s.equals("4"))
+			    	   count=4;
+			       if(s.equals("5"))
+			    	   count=5;
+			       if(s.equals("6"))
+			    	   count=6;
+			       if(s.equals("7"))
+			    	   count=7;
+			       if(s.equals("8"))
+			    	   count=8;
+			       if(s.equals("9"))
+			    	   count=9;
+			       if(s.equals("10"))
+			    	   count=10;
+			       if(s.equals("J"))
+			    	   count=11;
+			       if(s.equals("Q"))
+			    	   count=12;
+			       if(s.equals("K"))
+			    	   count=13;
+   			       tcount=tcount+count;
+   			       playerList.get(i).setTotalPoint(tcount);
+   			   
+			  }			      		  
+		  }  
+		
+		 
+		  for(int i=0;i<playerList.size();i++)
+		  {
+			  System.out.println(playerList.get(i).getName()+":  ");
+			  for(int j=0;j<playerList.get(i).getCardList().size();j++)
+			  {
+				  System.out.println(" "+playerList.get(i).getCardList().get(j).getShape()+
+						  playerList.get(i).getCardList().get(j).getNumber());
+				 
+			  }
+			  System.out.println(" Total Points:  "+playerList.get(i).getTotalPoint());
+			  if(playerList.get(i).getTotalPoint()>21)
+				 {		 
+						  System.out.println("  (Busted!!!)");		
+						
+				 }			  			 
+		  }	  	  		  
+  }
+		  
+
+public void cardComparing()
+{
+	 Collections.sort(playerList, new Comparator<Player>()
+	  {
+		@Override
+		public int compare(Player o1, Player o2)
+		{
+			  return o2.getTotalPoint()-o1.getTotalPoint();
+			}		  
+	  });
+	 System.out.println("The winner(s): ");
+	 
+	 for(int i=0;i<playerList.size();i++)
+	 {    
+		int p= playerList.get(i).getTotalPoint();
+		if(p<=21)
+		{
+			 winnerC.add(playerList.get(i)); 		 
+		}		 
+	 }
+	 
+	 if (winnerC.size()==1)
+	 {
+		 System.out.println(winnerC.get(0).getName());
+	 }
+	 else if(winnerC.size()==0)
+	 {
+		 System.out.println("no winners");
+	 }	 
+	 
+	 else{
+		 for(int j=0;j<winnerC.size()-1;j++)
+			 
+		 {
+		     if(winnerC.get(0).getTotalPoint()==winnerC.get(j+1).getTotalPoint())
+				 {
+					 System.out.println(winnerC.get(j+1).getName());
+				 }
+		 }
+		     System.out.println(winnerC.get(0).getName());
+	 }
+	 
+		 
+}
+		  
+
+public List<Player> getPlayerList()
+{
+	return playerList;
+}
+
+public void setPlayerList(List<Player> playerList)
+{
+	this.playerList = playerList;
+}
+
+public List<Card> getEntireCard()
+{
+	return entireCard;
+}
+
+public void setEntireCard(List<Card> entireCard)
+{
+	this.entireCard = entireCard;
+}
+  
+  
+ 
+  
+  
+  
+  }
+

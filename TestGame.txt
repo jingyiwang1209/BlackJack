@@ -1,0 +1,15 @@
+package blackJack;
+
+public class TestGame
+{
+
+	public static void main(String[] args)
+	{
+		GamingSystem gs=new GamingSystem();
+		gs.cardShuffling();
+		gs.cardHandling();
+		gs.cardComparing();
+
+	}
+
+}

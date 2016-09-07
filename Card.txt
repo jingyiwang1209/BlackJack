@@ -1,0 +1,34 @@
+package blackJack;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Card {
+
+	 private String Shape;
+	 private String Number;
+	public Card(String shape, String number)
+	{
+		super();
+		Shape = shape;
+		Number = number;
+	}
+	public String getShape()
+	{
+		return Shape;
+	}
+	public void setShape(String shape)
+	{
+		Shape = shape;
+	}
+	public String getNumber()
+	{
+		return Number;
+	}
+	public void setNumber(String number)
+	{
+		Number = number;
+	}
+	 
+	
+}
